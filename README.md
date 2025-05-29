@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+1- con v0 hacemos la interface, me creo data que es mock
 
-## Getting Started
+2- obtenemos las credenciales de usuario de google drive:
+I'll guide you through setting up Google Drive integration step by step.
+First, let's create a Google Cloud Project and enable the Google Drive API:
+Go to the Google Cloud Console
+Create a new project or select an existing one
+In the left sidebar, go to "APIs & Services" > "Library"
+Search for "Google Drive API" and enable it
+Set up OAuth 2.0 credentials:
+In the Google Cloud Console, go to "APIs & Services" > "Credentials"
+Click "Create Credentials" > "OAuth client ID"
+If prompted, configure the OAuth consent screen:
+Choose "External" user type
+Fill in the app name, user support email, and developer contact information
+Add the necessary scopes (at minimum, add https://www.googleapis.com/auth/drive.file)
+Add your domain to the authorized domains
+Create OAuth client ID:
+Choose "Web application" as the application type
+Add authorized JavaScript origins:
+http://localhost:3000 (for development)
+Your production domain (if you have one)
+Add authorized redirect URIs:
+http://localhost:3000/api/auth/callback/google (for development)
+Your production callback URL (if you have one)
+Note down your Client ID and Client Secret
 
-First, run the development server:
+2.1 puedo ver el cliente creado en esta direccion, ademas puedo agregar el url cuando
+este en produccion
+https://console.cloud.google.com/auth/clients
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+3 en .env.local
+# Google OAuth Credentials
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# NextAuth Configuration
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=       # Generate a random string for this
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4 instalar los paquetes
+npm install next-auth @auth/core googleapis
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
